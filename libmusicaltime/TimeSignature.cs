@@ -8,8 +8,8 @@ namespace libmusicaltime
 {
     public class TimeSignature
     {
-        public uint Beats { get; }
-        public NoteRhythm Pulse { get; }
+        public uint Beats { get; set;  }
+        public NoteRhythm Pulse { get; set; }
 
         public TimeSignature(uint beats, uint pulse)
         {

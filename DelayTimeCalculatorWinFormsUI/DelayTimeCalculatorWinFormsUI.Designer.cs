@@ -1,6 +1,15 @@
-﻿
+﻿using CustomControls;
+using libmusicaltime.Enumerations;
+
 namespace DelayTimeCalculatorWinFormsUI
 {
+    class NoteSubdivisionRadioButton : EnumeratedRadioButton<NoteRhythmEnumeration> { }
+    class NoteSubdivisionRadioGroupBox : EnumeratedRadioGroupBox<NoteRhythmEnumeration> { }
+    class NoteModifierRadioButton : EnumeratedRadioButton<NoteRhythmModifierEnumeration> { }
+    class NoteModifierRadioGroupBox : EnumeratedRadioGroupBox<NoteRhythmModifierEnumeration> { }
+    class TimeUnitRadioButton : EnumeratedRadioButton<TimeDivisionEnumeration> { }
+    class TimeUnitRadioGroupBox : EnumeratedRadioGroupBox<TimeDivisionEnumeration> { }
+
     partial class DelayTimeCalculatorWinFormsUI
     {
         /// <summary>
@@ -35,24 +44,24 @@ namespace DelayTimeCalculatorWinFormsUI
             this.txtTimeSigBeats = new System.Windows.Forms.TextBox();
             this.txtTimeSigPulse = new System.Windows.Forms.TextBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.grpNoteSubdivision = new CustomControls.RadioGroupBox();
-            this.grpModifier = new CustomControls.RadioGroupBox();
-            this.radWhole = new System.Windows.Forms.RadioButton();
-            this.radHalf = new System.Windows.Forms.RadioButton();
-            this.radQuarter = new System.Windows.Forms.RadioButton();
-            this.radEighth = new System.Windows.Forms.RadioButton();
-            this.radSixteenth = new System.Windows.Forms.RadioButton();
-            this.radThirtySecond = new System.Windows.Forms.RadioButton();
-            this.radNatural = new System.Windows.Forms.RadioButton();
-            this.radDotted = new System.Windows.Forms.RadioButton();
-            this.radTriplet = new System.Windows.Forms.RadioButton();
+            this.grpNoteSubdivision = new NoteSubdivisionRadioGroupBox();
+            this.radWhole = new NoteSubdivisionRadioButton();
+            this.radThirtySecond = new NoteSubdivisionRadioButton();
+            this.radSixteenth = new NoteSubdivisionRadioButton();
+            this.radEighth = new NoteSubdivisionRadioButton();
+            this.radQuarter = new NoteSubdivisionRadioButton();
+            this.radHalf = new NoteSubdivisionRadioButton();
+            this.grpModifier = new NoteModifierRadioGroupBox();
+            this.radTriplet = new NoteModifierRadioButton();
+            this.radDotted = new NoteModifierRadioButton();
+            this.radNatural = new NoteModifierRadioButton();
             this.lblTempo = new System.Windows.Forms.Label();
             this.txtTempo = new System.Windows.Forms.TextBox();
             this.lblBPM = new System.Windows.Forms.Label();
-            this.grpTimeUnit = new CustomControls.RadioGroupBox();
-            this.radMilliseconds = new System.Windows.Forms.RadioButton();
-            this.radSeconds = new System.Windows.Forms.RadioButton();
-            this.radMinutes = new System.Windows.Forms.RadioButton();
+            this.grpTimeUnit = new TimeUnitRadioGroupBox();
+            this.radMinutes = new TimeUnitRadioButton();
+            this.radSeconds = new TimeUnitRadioButton();
+            this.radMilliseconds = new TimeUnitRadioButton();
             this.txtTime = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblTimeUnits = new System.Windows.Forms.Label();
@@ -105,18 +114,6 @@ namespace DelayTimeCalculatorWinFormsUI
             this.grpNoteSubdivision.TabStop = false;
             this.grpNoteSubdivision.Text = "Note Subdivision";
             // 
-            // grpModifier
-            // 
-            this.grpModifier.Controls.Add(this.radTriplet);
-            this.grpModifier.Controls.Add(this.radDotted);
-            this.grpModifier.Controls.Add(this.radNatural);
-            this.grpModifier.Location = new System.Drawing.Point(12, 126);
-            this.grpModifier.Name = "grpModifier";
-            this.grpModifier.Size = new System.Drawing.Size(192, 53);
-            this.grpModifier.TabIndex = 2;
-            this.grpModifier.TabStop = false;
-            this.grpModifier.Text = "Note Rhythm Modifier";
-            // 
             // radWhole
             // 
             this.radWhole.AutoSize = true;
@@ -127,50 +124,6 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radWhole.TabStop = true;
             this.radWhole.Text = "1/1";
             this.radWhole.UseVisualStyleBackColor = true;
-            // 
-            // radHalf
-            // 
-            this.radHalf.AutoSize = true;
-            this.radHalf.Location = new System.Drawing.Point(54, 19);
-            this.radHalf.Name = "radHalf";
-            this.radHalf.Size = new System.Drawing.Size(42, 17);
-            this.radHalf.TabIndex = 0;
-            this.radHalf.TabStop = true;
-            this.radHalf.Text = "1/2";
-            this.radHalf.UseVisualStyleBackColor = true;
-            // 
-            // radQuarter
-            // 
-            this.radQuarter.AutoSize = true;
-            this.radQuarter.Location = new System.Drawing.Point(102, 19);
-            this.radQuarter.Name = "radQuarter";
-            this.radQuarter.Size = new System.Drawing.Size(42, 17);
-            this.radQuarter.TabIndex = 0;
-            this.radQuarter.TabStop = true;
-            this.radQuarter.Text = "1/4";
-            this.radQuarter.UseVisualStyleBackColor = true;
-            // 
-            // radEighth
-            // 
-            this.radEighth.AutoSize = true;
-            this.radEighth.Location = new System.Drawing.Point(150, 19);
-            this.radEighth.Name = "radEighth";
-            this.radEighth.Size = new System.Drawing.Size(42, 17);
-            this.radEighth.TabIndex = 0;
-            this.radEighth.TabStop = true;
-            this.radEighth.Text = "1/8";
-            this.radEighth.UseVisualStyleBackColor = true;
-            // 
-            // radSixteenth
-            // 
-            this.radSixteenth.AutoSize = true;
-            this.radSixteenth.Location = new System.Drawing.Point(198, 19);
-            this.radSixteenth.Name = "radSixteenth";
-            this.radSixteenth.Size = new System.Drawing.Size(48, 17);
-            this.radSixteenth.TabIndex = 0;
-            this.radSixteenth.TabStop = true;
-            this.radSixteenth.Text = "1/16";
-            this.radSixteenth.UseVisualStyleBackColor = true;
             // 
             // radThirtySecond
             // 
@@ -183,16 +136,72 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radThirtySecond.Text = "1/32";
             this.radThirtySecond.UseVisualStyleBackColor = true;
             // 
-            // radNatural
+            // radSixteenth
             // 
-            this.radNatural.AutoSize = true;
-            this.radNatural.Location = new System.Drawing.Point(7, 20);
-            this.radNatural.Name = "radNatural";
-            this.radNatural.Size = new System.Drawing.Size(58, 17);
-            this.radNatural.TabIndex = 0;
-            this.radNatural.TabStop = true;
-            this.radNatural.Text = "Normal";
-            this.radNatural.UseVisualStyleBackColor = true;
+            this.radSixteenth.AutoSize = true;
+            this.radSixteenth.Location = new System.Drawing.Point(198, 19);
+            this.radSixteenth.Name = "radSixteenth";
+            this.radSixteenth.Size = new System.Drawing.Size(48, 17);
+            this.radSixteenth.TabIndex = 0;
+            this.radSixteenth.TabStop = true;
+            this.radSixteenth.Text = "1/16";
+            this.radSixteenth.UseVisualStyleBackColor = true;
+            // 
+            // radEighth
+            // 
+            this.radEighth.AutoSize = true;
+            this.radEighth.Location = new System.Drawing.Point(150, 19);
+            this.radEighth.Name = "radEighth";
+            this.radEighth.Size = new System.Drawing.Size(42, 17);
+            this.radEighth.TabIndex = 0;
+            this.radEighth.TabStop = true;
+            this.radEighth.Text = "1/8";
+            this.radEighth.UseVisualStyleBackColor = true;
+            // 
+            // radQuarter
+            // 
+            this.radQuarter.AutoSize = true;
+            this.radQuarter.Location = new System.Drawing.Point(102, 19);
+            this.radQuarter.Name = "radQuarter";
+            this.radQuarter.Size = new System.Drawing.Size(42, 17);
+            this.radQuarter.TabIndex = 0;
+            this.radQuarter.TabStop = true;
+            this.radQuarter.Text = "1/4";
+            this.radQuarter.UseVisualStyleBackColor = true;
+            // 
+            // radHalf
+            // 
+            this.radHalf.AutoSize = true;
+            this.radHalf.Location = new System.Drawing.Point(54, 19);
+            this.radHalf.Name = "radHalf";
+            this.radHalf.Size = new System.Drawing.Size(42, 17);
+            this.radHalf.TabIndex = 0;
+            this.radHalf.TabStop = true;
+            this.radHalf.Text = "1/2";
+            this.radHalf.UseVisualStyleBackColor = true;
+            // 
+            // grpModifier
+            // 
+            this.grpModifier.Controls.Add(this.radTriplet);
+            this.grpModifier.Controls.Add(this.radDotted);
+            this.grpModifier.Controls.Add(this.radNatural);
+            this.grpModifier.Location = new System.Drawing.Point(12, 126);
+            this.grpModifier.Name = "grpModifier";
+            this.grpModifier.Size = new System.Drawing.Size(192, 53);
+            this.grpModifier.TabIndex = 2;
+            this.grpModifier.TabStop = false;
+            this.grpModifier.Text = "Note Rhythm Modifier";
+            // 
+            // radTriplet
+            // 
+            this.radTriplet.AutoSize = true;
+            this.radTriplet.Location = new System.Drawing.Point(134, 19);
+            this.radTriplet.Name = "radTriplet";
+            this.radTriplet.Size = new System.Drawing.Size(54, 17);
+            this.radTriplet.TabIndex = 0;
+            this.radTriplet.TabStop = true;
+            this.radTriplet.Text = "Triplet";
+            this.radTriplet.UseVisualStyleBackColor = true;
             // 
             // radDotted
             // 
@@ -205,16 +214,16 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radDotted.Text = "Dotted";
             this.radDotted.UseVisualStyleBackColor = true;
             // 
-            // radTriplet
+            // radNatural
             // 
-            this.radTriplet.AutoSize = true;
-            this.radTriplet.Location = new System.Drawing.Point(134, 19);
-            this.radTriplet.Name = "radTriplet";
-            this.radTriplet.Size = new System.Drawing.Size(54, 17);
-            this.radTriplet.TabIndex = 0;
-            this.radTriplet.TabStop = true;
-            this.radTriplet.Text = "Triplet";
-            this.radTriplet.UseVisualStyleBackColor = true;
+            this.radNatural.AutoSize = true;
+            this.radNatural.Location = new System.Drawing.Point(7, 20);
+            this.radNatural.Name = "radNatural";
+            this.radNatural.Size = new System.Drawing.Size(58, 17);
+            this.radNatural.TabIndex = 0;
+            this.radNatural.TabStop = true;
+            this.radNatural.Text = "Normal";
+            this.radNatural.UseVisualStyleBackColor = true;
             // 
             // lblTempo
             // 
@@ -253,16 +262,16 @@ namespace DelayTimeCalculatorWinFormsUI
             this.grpTimeUnit.TabStop = false;
             this.grpTimeUnit.Text = "Time Unit";
             // 
-            // radMilliseconds
+            // radMinutes
             // 
-            this.radMilliseconds.AutoSize = true;
-            this.radMilliseconds.Location = new System.Drawing.Point(7, 20);
-            this.radMilliseconds.Name = "radMilliseconds";
-            this.radMilliseconds.Size = new System.Drawing.Size(38, 17);
-            this.radMilliseconds.TabIndex = 0;
-            this.radMilliseconds.TabStop = true;
-            this.radMilliseconds.Text = "ms";
-            this.radMilliseconds.UseVisualStyleBackColor = true;
+            this.radMinutes.AutoSize = true;
+            this.radMinutes.Location = new System.Drawing.Point(99, 20);
+            this.radMinutes.Name = "radMinutes";
+            this.radMinutes.Size = new System.Drawing.Size(41, 17);
+            this.radMinutes.TabIndex = 0;
+            this.radMinutes.TabStop = true;
+            this.radMinutes.Text = "min";
+            this.radMinutes.UseVisualStyleBackColor = true;
             // 
             // radSeconds
             // 
@@ -275,16 +284,16 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radSeconds.Text = "sec";
             this.radSeconds.UseVisualStyleBackColor = true;
             // 
-            // radMinutes
+            // radMilliseconds
             // 
-            this.radMinutes.AutoSize = true;
-            this.radMinutes.Location = new System.Drawing.Point(99, 20);
-            this.radMinutes.Name = "radMinutes";
-            this.radMinutes.Size = new System.Drawing.Size(41, 17);
-            this.radMinutes.TabIndex = 0;
-            this.radMinutes.TabStop = true;
-            this.radMinutes.Text = "min";
-            this.radMinutes.UseVisualStyleBackColor = true;
+            this.radMilliseconds.AutoSize = true;
+            this.radMilliseconds.Location = new System.Drawing.Point(7, 20);
+            this.radMilliseconds.Name = "radMilliseconds";
+            this.radMilliseconds.Size = new System.Drawing.Size(38, 17);
+            this.radMilliseconds.TabIndex = 0;
+            this.radMilliseconds.TabStop = true;
+            this.radMilliseconds.Text = "ms";
+            this.radMilliseconds.UseVisualStyleBackColor = true;
             // 
             // txtTime
             // 
@@ -331,6 +340,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DelayTimeCalculatorWinFormsUI";
             this.Text = "Delay Time Calculator";
+            this.Load += new System.EventHandler(this.DelayTimeCalculatorWinFormsUI_Load);
             this.grpNoteSubdivision.ResumeLayout(false);
             this.grpNoteSubdivision.PerformLayout();
             this.grpModifier.ResumeLayout(false);
@@ -348,24 +358,24 @@ namespace DelayTimeCalculatorWinFormsUI
         private System.Windows.Forms.TextBox txtTimeSigBeats;
         private System.Windows.Forms.TextBox txtTimeSigPulse;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private CustomControls.RadioGroupBox grpNoteSubdivision;
-        private CustomControls.RadioGroupBox grpModifier;
-        private System.Windows.Forms.RadioButton radWhole;
-        private System.Windows.Forms.RadioButton radThirtySecond;
-        private System.Windows.Forms.RadioButton radSixteenth;
-        private System.Windows.Forms.RadioButton radEighth;
-        private System.Windows.Forms.RadioButton radQuarter;
-        private System.Windows.Forms.RadioButton radHalf;
-        private System.Windows.Forms.RadioButton radTriplet;
-        private System.Windows.Forms.RadioButton radDotted;
-        private System.Windows.Forms.RadioButton radNatural;
+        private NoteSubdivisionRadioGroupBox grpNoteSubdivision;
+        private NoteModifierRadioGroupBox grpModifier;
+        private NoteSubdivisionRadioButton radWhole;
+        private NoteSubdivisionRadioButton radThirtySecond;
+        private NoteSubdivisionRadioButton radSixteenth;
+        private NoteSubdivisionRadioButton radEighth;
+        private NoteSubdivisionRadioButton radQuarter;
+        private NoteSubdivisionRadioButton radHalf;
+        private NoteModifierRadioButton radNatural;
+        private NoteModifierRadioButton radDotted;
+        private NoteModifierRadioButton radTriplet;
         private System.Windows.Forms.Label lblTempo;
         private System.Windows.Forms.TextBox txtTempo;
         private System.Windows.Forms.Label lblBPM;
-        private CustomControls.RadioGroupBox grpTimeUnit;
-        private System.Windows.Forms.RadioButton radMinutes;
-        private System.Windows.Forms.RadioButton radSeconds;
-        private System.Windows.Forms.RadioButton radMilliseconds;
+        private TimeUnitRadioGroupBox grpTimeUnit;
+        private TimeUnitRadioButton radMinutes;
+        private TimeUnitRadioButton radSeconds;
+        private TimeUnitRadioButton radMilliseconds;
         private System.Windows.Forms.TextBox txtTime;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblTimeUnits;

@@ -46,15 +46,15 @@ namespace libmusicaltime.Enumerations
         }
     }
 
-    public class TimeDivisionEnumerator : Enumeration<TimeDivisionEnumerator>
+    public class TimeDivisionEnumeration : Enumeration<TimeDivisionEnumeration>
     {
         public TimeDivision Time { get; }
 
-        public static TimeDivisionEnumerator Millisecond = new TimeDivisionEnumerator(1, TimeDivision.Millisecond, "Milliseconds");
-        public static TimeDivisionEnumerator Second = new TimeDivisionEnumerator(1, TimeDivision.Second, "Seconds");
-        public static TimeDivisionEnumerator Minute = new TimeDivisionEnumerator(1, TimeDivision.Minute, "Minutes");
+        public static TimeDivisionEnumeration Millisecond = new TimeDivisionEnumeration(1, TimeDivision.Millisecond, "Milliseconds");
+        public static TimeDivisionEnumeration Second = new TimeDivisionEnumeration(1, TimeDivision.Second, "Seconds");
+        public static TimeDivisionEnumeration Minute = new TimeDivisionEnumeration(1, TimeDivision.Minute, "Minutes");
 
-        public TimeDivisionEnumerator(
+        public TimeDivisionEnumeration(
             int iID,
             TimeDivision time,
             string sName = "ERROR")

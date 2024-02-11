@@ -122,21 +122,21 @@ namespace CustomControls
             }
         }
 
-        /// <summary>
-        ///         ''' Use this method to automatically assign the correct Enumerator value to the radio button value.
-        ///         ''' This attempts to match the Text label property of the radio button with the Name of the correct Enum member.
-        ///         ''' </summary>
-        public void BindValuesToEnum()
-        {
-            IEnumerable<TEnum> enumerations = Enumeration<TEnum>.GetAll();
-            foreach (EnumeratedRadioButton<TEnum> radio in qRadios)
-            {
-                TEnum value = enumerations.FirstOrDefault(enumeration => radio.Text == enumeration.Name);
+        ///// <summary>
+        ///// Use this method to automatically assign the correct Enumerator value to the radio button value.
+        ///// This attempts to match the Text label property of the radio button with the Name of the correct Enum member.
+        ///// </summary>
+        //public void BindValuesToEnum(Func<string> )
+        //{
+        //    IEnumerable<TEnum> enumerations = Enumeration<TEnum>.GetAll();
+        //    foreach (EnumeratedRadioButton<TEnum> radio in qRadios)
+        //    {
+        //        TEnum value = enumerations.FirstOrDefault(enumeration => radio.Text == enumeration.Name);
 
-                if (value != null)
-                    radio.Value = value;
-            }
-        }
+        //        if (value != null)
+        //            radio.Value = value;
+        //    }
+        //}
     }
 
 }
