@@ -15,6 +15,7 @@ namespace CustomControls
     public class RadioGroupBox : GroupBox, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler CheckedChanged;
 
         protected void NotifyPropertyChanged(string sPropertyName)
         {
@@ -57,9 +58,10 @@ namespace CustomControls
             }
         }
 
-        private void RadioButtonsCheckedChanged(object sender, EventArgs e)
+        protected void RadioButtonsCheckedChanged(object sender, EventArgs e)
         {
             NotifyPropertyChanged(nameof(SelectedRadioValue));
+            CheckedChanged?.Invoke(this, new EventArgs());
         }
     }
 

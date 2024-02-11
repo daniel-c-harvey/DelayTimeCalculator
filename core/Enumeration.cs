@@ -102,14 +102,14 @@ namespace core
 
         public static bool operator ==(Enumeration<T> o1, Enumeration<T> o2)
         {
-            if (o1 == null || o2 == null)
+            if (o1 is null || o2 is null)
                 return false;
             return o1.Equals(o2);
         }
 
         public static bool operator !=(Enumeration<T> o1, Enumeration<T> o2)
         {
-            if (o1 == null || o2 == null)
+            if (o1 is null || o2 is null)
                 return true;
             return !o1.Equals(o2);
         }

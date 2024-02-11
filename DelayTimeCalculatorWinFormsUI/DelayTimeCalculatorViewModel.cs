@@ -10,7 +10,7 @@ namespace DelayTimeCalculatorWinFormsUI
 {
     public class DelayTimeCalculatorViewModel
     {
-        public DelayTimeCalculator Calculator { get; set; }
+        public DelayTimeCalculator Calculator { get; }
 
         public TimeSignature TimeSignature { get; set; }
         public Tempo Tempo { get; set; }
