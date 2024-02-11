@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,7 +9,7 @@ using core;
 
 namespace libmusicaltime.Enumerations
 {
-    public class NoteRhythmEnumeration : Enumeration<NoteRhythmEnumeration>
+    public class NoteRhythmEnumeration : Enumeration<NoteRhythmEnumeration>, INotifyPropertyChanged
     {
         public NoteRhythm Rhythm { get; }
 
@@ -25,6 +26,13 @@ namespace libmusicaltime.Enumerations
             : base((int)rhythm.Subdivision, sName)
         {
             Rhythm = rhythm;
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void RaiseNotifyPropertyChanged([CallerMemberName] string property = "ERROR")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 
@@ -51,8 +59,8 @@ namespace libmusicaltime.Enumerations
         public TimeDivision Time { get; }
 
         public static TimeDivisionEnumeration Millisecond = new TimeDivisionEnumeration(1, TimeDivision.Millisecond, "Milliseconds");
-        public static TimeDivisionEnumeration Second = new TimeDivisionEnumeration(1, TimeDivision.Second, "Seconds");
-        public static TimeDivisionEnumeration Minute = new TimeDivisionEnumeration(1, TimeDivision.Minute, "Minutes");
+        public static TimeDivisionEnumeration Second = new TimeDivisionEnumeration(2, TimeDivision.Second, "Seconds");
+        public static TimeDivisionEnumeration Minute = new TimeDivisionEnumeration(3, TimeDivision.Minute, "Minutes");
 
         public TimeDivisionEnumeration(
             int iID,

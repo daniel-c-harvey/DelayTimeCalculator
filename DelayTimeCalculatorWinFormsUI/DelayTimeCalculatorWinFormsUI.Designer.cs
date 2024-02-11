@@ -124,6 +124,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radWhole.TabStop = true;
             this.radWhole.Text = "1/1";
             this.radWhole.UseVisualStyleBackColor = true;
+            this.radWhole.Value = null;
             // 
             // radThirtySecond
             // 
@@ -135,6 +136,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radThirtySecond.TabStop = true;
             this.radThirtySecond.Text = "1/32";
             this.radThirtySecond.UseVisualStyleBackColor = true;
+            this.radThirtySecond.Value = null;
             // 
             // radSixteenth
             // 
@@ -146,6 +148,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radSixteenth.TabStop = true;
             this.radSixteenth.Text = "1/16";
             this.radSixteenth.UseVisualStyleBackColor = true;
+            this.radSixteenth.Value = null;
             // 
             // radEighth
             // 
@@ -157,6 +160,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radEighth.TabStop = true;
             this.radEighth.Text = "1/8";
             this.radEighth.UseVisualStyleBackColor = true;
+            this.radEighth.Value = null;
             // 
             // radQuarter
             // 
@@ -168,6 +172,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radQuarter.TabStop = true;
             this.radQuarter.Text = "1/4";
             this.radQuarter.UseVisualStyleBackColor = true;
+            this.radQuarter.Value = null;
             // 
             // radHalf
             // 
@@ -179,6 +184,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radHalf.TabStop = true;
             this.radHalf.Text = "1/2";
             this.radHalf.UseVisualStyleBackColor = true;
+            this.radHalf.Value = null;
             // 
             // grpModifier
             // 
@@ -202,6 +208,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radTriplet.TabStop = true;
             this.radTriplet.Text = "Triplet";
             this.radTriplet.UseVisualStyleBackColor = true;
+            this.radTriplet.Value = null;
             // 
             // radDotted
             // 
@@ -213,6 +220,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radDotted.TabStop = true;
             this.radDotted.Text = "Dotted";
             this.radDotted.UseVisualStyleBackColor = true;
+            this.radDotted.Value = null;
             // 
             // radNatural
             // 
@@ -224,6 +232,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radNatural.TabStop = true;
             this.radNatural.Text = "Normal";
             this.radNatural.UseVisualStyleBackColor = true;
+            this.radNatural.Value = null;
             // 
             // lblTempo
             // 
@@ -272,6 +281,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radMinutes.TabStop = true;
             this.radMinutes.Text = "min";
             this.radMinutes.UseVisualStyleBackColor = true;
+            this.radMinutes.Value = null;
             // 
             // radSeconds
             // 
@@ -283,6 +293,7 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radSeconds.TabStop = true;
             this.radSeconds.Text = "sec";
             this.radSeconds.UseVisualStyleBackColor = true;
+            this.radSeconds.Value = null;
             // 
             // radMilliseconds
             // 
@@ -294,11 +305,13 @@ namespace DelayTimeCalculatorWinFormsUI
             this.radMilliseconds.TabStop = true;
             this.radMilliseconds.Text = "ms";
             this.radMilliseconds.UseVisualStyleBackColor = true;
+            this.radMilliseconds.Value = null;
             // 
             // txtTime
             // 
             this.txtTime.Location = new System.Drawing.Point(229, 29);
             this.txtTime.Name = "txtTime";
+            this.txtTime.ReadOnly = true;
             this.txtTime.Size = new System.Drawing.Size(75, 20);
             this.txtTime.TabIndex = 7;
             // 

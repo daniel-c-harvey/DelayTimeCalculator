@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using core.DataBinding;
 using libmusicaltime;
 using libmusicaltime.Enumerations;
-using CustomControls;
 
 namespace DelayTimeCalculatorWinFormsUI
 {
@@ -53,52 +54,50 @@ namespace DelayTimeCalculatorWinFormsUI
         private void DataBind()
         {
             // Inputs
-            txtTimeSigBeats.DataBindings.Add(
+            txtTimeSigBeats.DataBindings.AddBi(
                 new Binding(
                     nameof(txtTimeSigBeats.Text), 
                     model.TimeSignature, 
                     nameof(model.TimeSignature.Beats)));
 
-            txtTimeSigPulse.DataBindings.Add(
+            txtTimeSigPulse.DataBindings.AddBi(
                 new Binding(
                     nameof(txtTimeSigPulse.Text), 
                     model.TimeSignature.Pulse, 
                     nameof(model.TimeSignature.Pulse.Subdivision)));
 
-            txtTempo.DataBindings.Add(
+            txtTempo.DataBindings.AddBi(
                 new Binding(
                     nameof(txtTempo.Text),
                     model.Tempo,
                     nameof(model.Tempo.BeatsPerMinute)));
 
-            grpNoteSubdivision.DataBindings.Add(
+            grpNoteSubdivision.DataBindings.AddBi(
                 new Binding(
                     nameof(grpNoteSubdivision.SelectedRadioValue),
                     model,
                     nameof(model.NoteSubdivision)));
 
-            grpModifier.DataBindings.Add(
+            grpModifier.DataBindings.AddBi(
                 new Binding(
                     nameof(grpModifier.SelectedRadioValue),
                     model,
                     nameof(model.NoteModifier)));
 
-            grpTimeUnit.DataBindings.Add(
+            grpTimeUnit.DataBindings.AddBi(
                 new Binding(
                     nameof(grpTimeUnit.SelectedRadioValue),
                     model,
                     nameof(model.TimeUnit)));
 
             // Outputs
-            var timeValueBinding = new Binding(
-                nameof(txtTime.Text),
-                model,
-                nameof(model.TimeOutput));
-            timeValueBinding.ControlUpdateMode = ControlUpdateMode.OnPropertyChanged;
-            timeValueBinding.DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
-            txtTime.DataBindings.Add(timeValueBinding);
+            txtTime.DataBindings.AddBi(
+                new Binding(
+                    nameof(txtTime.Text),
+                    model,
+                    nameof(model.TimeOutput)));
 
-            lblTimeUnits.DataBindings.Add(
+            lblTimeUnits.DataBindings.AddBi(
                 new Binding(
                     nameof(lblTimeUnits.Text),
                     model.TimeUnit,
@@ -129,7 +128,7 @@ namespace DelayTimeCalculatorWinFormsUI
             model.TimeOutput = model.Calculator.CalculateDelayTime(
                 model.TimeSignature,
                 model.Tempo,
-                model.NoteSubdivision.Rhythm,
+                new NoteRhythm(model.NoteSubdivision.Rhythm.Subdivision, model.NoteModifier.Modifier),
                 model.TimeUnit.Time);
         }
     }

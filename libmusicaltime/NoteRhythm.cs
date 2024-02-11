@@ -5,15 +5,11 @@ namespace libmusicaltime
     public class NoteRhythm
     {
         public uint Subdivision { get; }
-        public NoteRhythmModifier Modifier { get; private set; }
+        public NoteRhythmModifier Modifier { get; set; }
 
         public NoteRhythm(uint subdivision, NoteRhythmModifier mod = null)
         {
-            if (mod is null)
-            {
-                Modifier = NoteRhythmModifier.Normal;
-            }
-
+            Modifier = mod ?? NoteRhythmModifier.Normal;
             Subdivision = subdivision;
         }
 

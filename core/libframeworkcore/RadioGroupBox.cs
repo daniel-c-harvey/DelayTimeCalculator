@@ -17,6 +17,11 @@ namespace CustomControls
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler CheckedChanged;
 
+        public RadioGroupBox()
+        {
+            ControlAdded += _ControlAdded;
+        }
+
         protected void NotifyPropertyChanged(string sPropertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(sPropertyName));
@@ -47,7 +52,7 @@ namespace CustomControls
             }
         }
 
-        private void _ControlAdded(object sender, ControlEventArgs e)
+        protected void _ControlAdded(object sender, ControlEventArgs e)
         {
             RadioButton optNew = e.Control as RadioButton;
 
