@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace libdelaytime
+namespace libmusicaltime
 {
     public class TimeDivision
     {
@@ -15,8 +15,8 @@ namespace libdelaytime
             Milliseconds = milliseconds;
         }
 
-        public static TimeDivision millisecond = new(1);
-        public static TimeDivision second = new(1000);
-        public static TimeDivision minute = new(60000);
+        public static TimeDivision Millisecond = new TimeDivision(1);
+        public static TimeDivision Second = new TimeDivision(1000);
+        public static TimeDivision Minute = new TimeDivision(60000);
     }
 }

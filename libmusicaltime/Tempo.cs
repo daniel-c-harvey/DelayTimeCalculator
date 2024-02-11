@@ -1,5 +1,5 @@
 ﻿
-namespace libdelaytime
+namespace libmusicaltime
 {
     public class Tempo
     {

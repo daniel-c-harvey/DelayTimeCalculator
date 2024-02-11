@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\testutils\testutils\testutils.csproj" />
-    <ProjectReference Include="..\libdelaytime\libdelaytime.csproj" />
+    <ProjectReference Include="..\libmusicaltime\libmusicaltime.csproj" />
   </ItemGroup>
 
 </Project>
