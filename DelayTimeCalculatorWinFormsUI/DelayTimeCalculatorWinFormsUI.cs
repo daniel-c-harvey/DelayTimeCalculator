@@ -89,11 +89,13 @@ namespace DelayTimeCalculatorWinFormsUI
                     model,
                     nameof(model.TimeUnit)));
 
+            // Outputs
             var timeValueBinding = new Binding(
                 nameof(txtTime.Text),
                 model,
                 nameof(model.TimeOutput));
             timeValueBinding.ControlUpdateMode = ControlUpdateMode.OnPropertyChanged;
+            timeValueBinding.DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
             txtTime.DataBindings.Add(timeValueBinding);
 
             lblTimeUnits.DataBindings.Add(
@@ -115,8 +117,7 @@ namespace DelayTimeCalculatorWinFormsUI
         {
             txtTimeSigBeats.TextChanged += Recalculate;
             txtTimeSigPulse.TextChanged += Recalculate;
-            //txtTempo.TextChanged += Recalculate;
-            txtTempo.TextChanged += a;
+            txtTempo.TextChanged += Recalculate;
 
             grpNoteSubdivision.CheckedChanged += Recalculate;
             grpModifier.CheckedChanged += Recalculate;
@@ -130,11 +131,6 @@ namespace DelayTimeCalculatorWinFormsUI
                 model.Tempo,
                 model.NoteSubdivision.Rhythm,
                 model.TimeUnit.Time);
-        }
-
-        public void a(Object sender, EventArgs e)
-        {
-
         }
     }
 }
