@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DelayTimeCalculatorWPFUI.View"
+        xmlns:view="clr-namespace:DelayTimeCalculatorWPFUI.View"
+        xmlns:viewmodel="clr-namespace:DelayTimeCalculatorWPFUI.ViewModel"
+        xmlns:com="clr-namespace:DelayTimeCalculatorWPFUI.Component"
+        xmlns:enum="clr-namespace:libmusicaltime.Enumerations;assembly=libmusicaltime"
         mc:Ignorable="d"
-        Title="DelayTimeCalculatorView" Height="180" Width="420">
+        Title="Echo Space" 
+        Height="200" 
+        Width="420" 
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="Margin" Value="0" />
@@ -16,54 +22,98 @@
         </Style>
         <Style TargetType="RadioButton">
             <Setter Property="Margin" Value="4,0,6,0" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Caption}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Caption}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
+    <Window.DataContext>
+        <viewmodel:DelayTimeCalculatorViewModel x:Name="model"/>
+    </Window.DataContext>
     <StackPanel>
         <StackPanel>
-            <GroupBox>
-                <Grid Margin="8,4,8,4">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+            <Grid Margin="8,4,8,4">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="4,0,16,0">
-                        <StackPanel Width="60">
-                            <Label Padding="5,5,5,0" HorizontalContentAlignment="Center">Time</Label>
-                            <Label Padding="5,0,5,5" HorizontalContentAlignment="Center">Signature</Label>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBox Width="20"/>
-                            <TextBox Width="20"/>
-                        </StackPanel>
+                <StackPanel Grid.Row="0" 
+                            Grid.Column="0" 
+                            Orientation="Horizontal" 
+                            Margin="8,0,16,0">
+                    <TextBlock Width="60"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center">
+                        Time
+                        <LineBreak />
+                        Signature
+                    </TextBlock>
+                    <StackPanel>
+                        <TextBox Name="txtTimeSigBeats"
+                                 Width="20"  
+                                 Text="{Binding TimeSignature.Beats}"/>
+                        <TextBox Name="txtTimeSigPulse"
+                                 Width="20" 
+                                 Text="{Binding TimeSignature.Pulse.Subdivision}"/>
                     </StackPanel>
+                </StackPanel>
 
-                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="16,0,16,0">
-                        <Label Padding="5,5,5,0">Tempo</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox MinWidth="60"></TextBox>
-                            <Label Padding="2,5,5,5">BPM</Label>
-                        </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="16,0,16,0">
+                    <Label Padding="5,5,5,0">
+                        Tempo
+                    </Label>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="txtTempo"
+                                 MinWidth="60"                                   
+                                 Text="{Binding Tempo.BeatsPerMinute}"/>
+                        <Label Padding="2,5,5,5"
+                               Content="BPM"/>
                     </StackPanel>
+                </StackPanel>
 
-                    <StackPanel Grid.Row="0" Grid.Column="2" Margin="16,0,4,0">
-                        <Label Padding="5,5,5,0">Time</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox MinWidth="60"/>
-                            <Label Padding="2,5,5,5">&lt;unit&gt;</Label>
-                        </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" Margin="16,0,4,0">
+                    <Label Padding="5,5,5,0">
+                        Time
+                    </Label>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="txtTime"
+                                 MinWidth="60"
+                                 Text="{Binding TimeOutput}"/>
+                        <Label Padding="2,5,5,5" 
+                               Content="{Binding TimeUnit.Caption}"/>
                     </StackPanel>
-                    
-                </Grid>
-            </GroupBox>
+                </StackPanel>
+
+            </Grid>
         </StackPanel>
-        
-        <GroupBox Margin="8,4,8,4" Header="Note Subdivision">
-            <ComboBox />
+
+        <GroupBox Name="grpNoteSubdivision" 
+                  Margin="8,4,8,4" 
+                  Header="Note Subdivision">
+            <ComboBox Name="cbo" 
+                      IsEditable="False"
+                      ItemsSource="{x:Static enum:NoteRhythmEnumeration.AllItems}"
+                      SelectedItem="{Binding NoteSubdivision}">
+            </ComboBox>
         </GroupBox>
         
         <Grid>
@@ -75,19 +125,50 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <GroupBox Grid.Row="0" Grid.Column="0" Header="Note Rhythm Modifier" Margin="8,4,8,4">
+            <!--<com:RadioGroupBox x:Name="grpModifier" 
+                               Grid.Row="0" 
+                               Grid.Column="0" 
+                               Header="Note Rhythm Modifier" 
+                               Margin="8,4,8,4">
+                --><!--SelectedValue="{Binding NoteModifier}"--><!--
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton GroupName="abc1">Normal</RadioButton>
-                    <RadioButton GroupName="abc1">Dotted</RadioButton>
-                    <RadioButton GroupName="abc1">Triplet</RadioButton>
+                    <RadioButton Name="radNormal" 
+                                 Content="{x:Static enum:NoteRhythmModifierEnumeration.Normal}" />
+                    <RadioButton Name="radDotted" 
+                                 Content="{x:Static enum:NoteRhythmModifierEnumeration.Dotted}"/>
+                    <RadioButton Name="radTriplet" 
+                                 Content="{x:Static enum:NoteRhythmModifierEnumeration.Triplet}"/>
                 </StackPanel>
-            </GroupBox>
+            </com:RadioGroupBox>-->
 
-            <GroupBox Grid.Row="0" Grid.Column="1" Header="Time Unit" Margin="8,4,8,4">
+            <com:RadioGroupBox x:Name="grpModifier" 
+                               Grid.Row="0" 
+                               Grid.Column="0" 
+                               Header="Note Rhythm Modifier" 
+                               Margin="8,4,8,4"
+                               Orientation="Horizontal"
+                               SelectedValue="{Binding NoteModifier}">
+                <RadioButton Name="radNormal" 
+                             Content="{x:Static enum:NoteRhythmModifierEnumeration.Normal}" />
+                <RadioButton Name="radDotted" 
+                             Content="{x:Static enum:NoteRhythmModifierEnumeration.Dotted}"/>
+                <RadioButton Name="radTriplet" 
+                             Content="{x:Static enum:NoteRhythmModifierEnumeration.Triplet}"/>
+            </com:RadioGroupBox>
+
+            <GroupBox Name="grpTimeUnit" 
+                      Grid.Row="0" 
+                      Grid.Column="1" 
+                      Header="Time Unit" 
+                      Margin="8,4,8,4">
+                <!-- Add a data template for the enumerated types to get the cation from the display caption -->
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton GroupName="xyz">ms</RadioButton>
-                    <RadioButton GroupName="xyz">sec</RadioButton>
-                    <RadioButton GroupName="xyz">min</RadioButton>
+                    <RadioButton Name="radMillisecond"
+                                 Content="{x:Static enum:TimeDivisionEnumeration.Millisecond}"/>
+                    <RadioButton Name="radSecond" 
+                                 Content="{x:Static enum:TimeDivisionEnumeration.Second}"/>
+                    <RadioButton Name="radMinute" 
+                                 Content="{x:Static enum:TimeDivisionEnumeration.Minute}"/>
                 </StackPanel>
             </GroupBox>
         </Grid>

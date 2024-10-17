@@ -1,27 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using libmusicaltime.Enumerations;
+using libmusicaltime;
+
 
 namespace DelayTimeCalculatorWPFUI.View
 {
     /// <summary>
     /// Interaction logic for DelayTimeCalculatorView.xaml
     /// </summary>
-    public partial class DelayTimeCalculatorView : Window
+    public partial class DelayTimeCalculatorView : System.Windows.Window
     {
         public DelayTimeCalculatorView()
         {
             InitializeComponent();
+
+            InitAssignDefaults();
+        }
+
+        private void InitAssignDefaults()
+        {
+            model.TimeSignature = new TimeSignature(4, 4);
+            model.Tempo = new Tempo(120);
+            model.NoteSubdivision = NoteRhythmEnumeration.Quarter;
+            model.NoteModifier = NoteRhythmModifierEnumeration.Normal;
+            model.TimeUnit = TimeDivisionEnumeration.Millisecond;
+        }
+
+        public void AttachHandlers()
+        {
+            txtTimeSigBeats.TextChanged += Recalculate;
+            txtTimeSigPulse.TextChanged += Recalculate;
+            txtTempo.TextChanged += Recalculate;
+
+            cbo.SelectionChanged += Recalculate;
+            //grpModifier.CheckedChanged += Recalculate;
+            //grpTimeUnit.CheckedChanged += Recalculate;
+        }
+
+        public void Recalculate(Object sender, EventArgs e)
+        {
+            model.Recalculate();
         }
     }
 }

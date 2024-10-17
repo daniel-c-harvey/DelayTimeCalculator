@@ -29,20 +29,23 @@ namespace core
             return Name;
         }
 
-        public static ISet<T> GetAll()
+        public static ISet<T> AllItems
         {
-            if (m_oEnumerations == null)
+            get
             {
-                HashSet<T> hs = new HashSet<T>();
-                GetAllInternal().ForEach(t => hs.Add(t));
-                m_oEnumerations = hs;
-            }
-            else
-            {
-                m_oEnumerations.GetEnumerator().Reset();// TODO check if this is necessary?  do subsequent calls need this or is the enumerator regenerated every time the list is enumerated?
-            }
+                if (m_oEnumerations == null)
+                {
+                    HashSet<T> hs = new HashSet<T>();
+                    GetAllInternal().ForEach(t => hs.Add(t));
+                    m_oEnumerations = hs;
+                }
+                else
+                {
+                    m_oEnumerations.GetEnumerator().Reset();// TODO check if this is necessary?  do subsequent calls need this or is the enumerator regenerated every time the list is enumerated?
+                }
 
-            return m_oEnumerations;
+                return m_oEnumerations;
+            }            
         }
 
         /// <summary>
@@ -64,7 +67,7 @@ namespace core
 
         public static T GetById(int iID)
         {
-            return GetAll().FirstOrDefault(item => item.Id == iID);
+            return AllItems.FirstOrDefault(item => item.Id == iID);
         }
 
         public static T GetById(int? iID)
@@ -72,7 +75,7 @@ namespace core
             if (iID == null)
                 return null;
 
-            return GetAll().FirstOrDefault(item => item.Id == iID.Value);
+            return AllItems.FirstOrDefault(item => item.Id == iID.Value);
         }
 
         public static IDictionary<int, T> GetDictionary()
@@ -80,7 +83,7 @@ namespace core
             if (m_dctEnumerations == null)
             {
                 m_dctEnumerations = new Dictionary<int, T>();
-                GetAll().ForEach((item) => { if (item != null) m_dctEnumerations.Add(item.Id, item);  });
+                AllItems.ForEach((item) => { if (item != null) m_dctEnumerations.Add(item.Id, item);  });
             }
 
             return m_dctEnumerations;
@@ -120,4 +123,15 @@ namespace core
         }
     }
 
+
+    public abstract class DisplayEnumeration<T> : Enumeration<T>
+    where T : DisplayEnumeration<T>
+    {
+        public string Caption { get; set; }
+        
+        protected DisplayEnumeration(int iID, string sName, string sCaption) : base(iID, sName)
+        {
+            Caption = sCaption;
+        }
+    }
 }

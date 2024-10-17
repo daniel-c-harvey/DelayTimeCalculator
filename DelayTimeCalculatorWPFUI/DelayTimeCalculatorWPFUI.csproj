@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\core\libframeworkcore\libframeworkcore.csproj" />
     <ProjectReference Include="..\libmusicaltime\libmusicaltime.csproj" />
   </ItemGroup>
 

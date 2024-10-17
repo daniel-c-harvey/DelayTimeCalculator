@@ -4,7 +4,7 @@ namespace libmusicaltime
 {
     public class NoteRhythm
     {
-        public uint Subdivision { get; }
+        public uint Subdivision { get; set; }
         public NoteRhythmModifier Modifier { get; set; }
 
         public NoteRhythm(uint subdivision, NoteRhythmModifier mod = null)

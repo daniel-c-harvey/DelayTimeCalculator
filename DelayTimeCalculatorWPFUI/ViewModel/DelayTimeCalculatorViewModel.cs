@@ -1,9 +1,11 @@
-﻿using libmusicaltime;
+﻿using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using libmusicaltime;
 using libmusicaltime.Enumerations;
 
 namespace DelayTimeCalculatorWPFUI.ViewModel
 {
-    public class DelayTimeCalculatorViewModel
+    public class DelayTimeCalculatorViewModel : INotifyPropertyChanged
     {
         private TimeSignature timeSignature;
         private Tempo tempo;
@@ -11,6 +13,8 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
         private NoteRhythmEnumeration noteSubdivision;
         private NoteRhythmModifierEnumeration noteModifier;
         private TimeDivisionEnumeration timeUnit;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public DelayTimeCalculator Calculator { get; }
 
@@ -20,8 +24,11 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
             get => timeSignature;
             set
             {
-                timeSignature = value;
-                //RaiseNotifyPropertyChanged(); 
+                if (timeSignature != value)
+                {
+                    timeSignature = value;
+                    RaiseNotifyPropertyChanged();
+                }
             }
         }
         public Tempo Tempo
@@ -29,8 +36,11 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
             get => tempo;
             set
             {
-                tempo = value;
-                //RaiseNotifyPropertyChanged(); 
+                if (tempo != value)
+                {
+                    tempo = value;
+                    RaiseNotifyPropertyChanged();
+                }
             }
         }
         public NoteRhythmEnumeration NoteSubdivision
@@ -38,8 +48,11 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
             get => noteSubdivision;
             set
             {
-                noteSubdivision = value;
-                //RaiseNotifyPropertyChanged(); 
+                if (noteSubdivision != value)
+                {
+                    noteSubdivision = value;
+                    RaiseNotifyPropertyChanged();
+                }
             }
         }
         public NoteRhythmModifierEnumeration NoteModifier
@@ -47,8 +60,11 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
             get => noteModifier;
             set
             {
-                noteModifier = value;
-                //RaiseNotifyPropertyChanged(); 
+                if (noteModifier != value)
+                {
+                    noteModifier = value;
+                    RaiseNotifyPropertyChanged();
+                }
             }
         }
 
@@ -58,8 +74,11 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
             get => timeOutput;
             set
             {
-                timeOutput = value;
-                //RaiseNotifyPropertyChanged(); 
+                if (timeOutput != value)
+                {
+                    timeOutput = value;
+                    RaiseNotifyPropertyChanged();
+                }
             }
         }
         public TimeDivisionEnumeration TimeUnit
@@ -67,14 +86,34 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
             get => timeUnit;
             set
             {
-                timeUnit = value;
-                //RaiseNotifyPropertyChanged(); 
+                if (timeUnit != value)
+                {
+                    timeUnit = value;
+                    RaiseNotifyPropertyChanged();
+                }
             }
         }
 
         public DelayTimeCalculatorViewModel()
         {
             Calculator = new DelayTimeCalculator();
+        }
+
+        public void Recalculate()
+        {
+            TimeOutput = Calculator.CalculateDelayTime(TimeSignature,
+                                                       Tempo,
+                                                       new NoteRhythm(NoteSubdivision.Rhythm.Subdivision, 
+                                                                      NoteModifier.Modifier),
+                                                       TimeUnit.Time);
+        }
+
+        private void RaiseNotifyPropertyChanged([CallerMemberName] string name = "ERROR")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

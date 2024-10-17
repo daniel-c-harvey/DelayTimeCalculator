@@ -5,8 +5,6 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "libdelaycalctests", "libdelaycalctests\libdelaycalctests.csproj", "{2F96D79B-34FC-4B76-80C2-A930459C74F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testutils", "..\..\testutils\testutils\testutils.csproj", "{78303499-BEEA-478E-BC15-89AF1BAE9199}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelayTimeCalculatorWinFormsUI", "DelayTimeCalculatorWinFormsUI\DelayTimeCalculatorWinFormsUI.csproj", "{B7F456F7-52E5-4AF4-BF74-751CBEA4B1D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libframeworkcore", "core\libframeworkcore\libframeworkcore.csproj", "{B52C2476-6937-48F9-8D03-8F7482F8C951}"
@@ -27,10 +25,6 @@ Global
 		{2F96D79B-34FC-4B76-80C2-A930459C74F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F96D79B-34FC-4B76-80C2-A930459C74F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F96D79B-34FC-4B76-80C2-A930459C74F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78303499-BEEA-478E-BC15-89AF1BAE9199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78303499-BEEA-478E-BC15-89AF1BAE9199}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78303499-BEEA-478E-BC15-89AF1BAE9199}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78303499-BEEA-478E-BC15-89AF1BAE9199}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B7F456F7-52E5-4AF4-BF74-751CBEA4B1D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7F456F7-52E5-4AF4-BF74-751CBEA4B1D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7F456F7-52E5-4AF4-BF74-751CBEA4B1D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
