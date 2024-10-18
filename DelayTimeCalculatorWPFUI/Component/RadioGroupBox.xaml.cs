@@ -12,8 +12,6 @@ namespace DelayTimeCalculatorWPFUI.Component
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(typeof(RadioGroupBox)));
         }
 
-        protected IEnumerable<RadioButton> Radios => LogicalTreeHelper.GetChildren(this).OfType<RadioButton>();
-
         public static readonly DependencyProperty HeaderProperty = 
             DependencyProperty.Register(nameof(Header), 
                                         typeof(string), 
@@ -24,35 +22,39 @@ namespace DelayTimeCalculatorWPFUI.Component
             set => SetValue(HeaderProperty, value);
         }
 
-        //public delegate void SelectedValueChangedEvent(object value);
-        //public event SelectedValueChangedEvent? OnSelectedValueChanged;
-
         public static readonly DependencyProperty SelectedValueProperty = 
             DependencyProperty.Register(nameof(SelectedValue), 
                                         typeof(object), 
                                         typeof(RadioGroupBox),
-                                        new PropertyMetadata(OnSelectedValueChanged));
+                                        new PropertyMetadata(Y));
 
-        private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void Y(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var radio = ((RadioGroupBox)d).Radios.FirstOrDefault(r => r.Content.Equals(e.NewValue));
-            if (radio != null)
-            {
-                radio.IsChecked = true;
-                // notify
-            }
+   
         }
 
         public object? SelectedValue
         {
-            get => GetValue(SelectedValueProperty);//Radios.FirstOrDefault(r => r.IsChecked ?? false)?.Content;
+            get => GetValue(SelectedValueProperty);
             set => SetValue(SelectedValueProperty, value);
         }
 
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.Register(nameof(Orientation),
                                         typeof(Orientation),
-                                        typeof(RadioGroupBox));
+                                        typeof(RadioGroupBox),
+                                        new PropertyMetadata(X));
+
+        private static void X(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        private void CheckedItemChanged(object sender, RoutedEventArgs e)
+        {
+            SelectedValue = ((ContentControl)sender).Content;
+        }
+
         public Orientation Orientation
         {
             get => (Orientation)GetValue(OrientationProperty);

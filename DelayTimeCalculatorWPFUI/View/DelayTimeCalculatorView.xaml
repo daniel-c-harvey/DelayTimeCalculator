@@ -21,7 +21,6 @@
             <Setter Property="Margin" Value="3" />
         </Style>
         <Style TargetType="RadioButton">
-            <Setter Property="Margin" Value="4,0,6,0" />
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
@@ -144,33 +143,21 @@
             <com:RadioGroupBox x:Name="grpModifier" 
                                Grid.Row="0" 
                                Grid.Column="0" 
-                               Header="Note Rhythm Modifier" 
+                               Margin="8,4,8,4"
+                               Header="Note Rhythm Modifier"
+                               Orientation="Horizontal"
+                               SelectedValue="{Binding NoteModifier}" 
+                               ItemsSource="{x:Static enum:NoteRhythmModifierEnumeration.AllItems}"/>
+
+
+            <com:RadioGroupBox x:Name="grpTimeUnit" 
+                               Grid.Row="0" 
+                               Grid.Column="1" 
+                               Header="Time Unit" 
                                Margin="8,4,8,4"
                                Orientation="Horizontal"
-                               SelectedValue="{Binding NoteModifier}">
-                <RadioButton Name="radNormal" 
-                             Content="{x:Static enum:NoteRhythmModifierEnumeration.Normal}" />
-                <RadioButton Name="radDotted" 
-                             Content="{x:Static enum:NoteRhythmModifierEnumeration.Dotted}"/>
-                <RadioButton Name="radTriplet" 
-                             Content="{x:Static enum:NoteRhythmModifierEnumeration.Triplet}"/>
+                               ItemsSource="{x:Static enum:TimeDivisionEnumeration.AllItems}">
             </com:RadioGroupBox>
-
-            <GroupBox Name="grpTimeUnit" 
-                      Grid.Row="0" 
-                      Grid.Column="1" 
-                      Header="Time Unit" 
-                      Margin="8,4,8,4">
-                <!-- Add a data template for the enumerated types to get the cation from the display caption -->
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton Name="radMillisecond"
-                                 Content="{x:Static enum:TimeDivisionEnumeration.Millisecond}"/>
-                    <RadioButton Name="radSecond" 
-                                 Content="{x:Static enum:TimeDivisionEnumeration.Second}"/>
-                    <RadioButton Name="radMinute" 
-                                 Content="{x:Static enum:TimeDivisionEnumeration.Minute}"/>
-                </StackPanel>
-            </GroupBox>
         </Grid>
     </StackPanel>
 </Window>
