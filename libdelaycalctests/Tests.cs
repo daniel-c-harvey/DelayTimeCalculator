@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using libmusicaltime;
-using testutils;
+using libtestutils;
 
 namespace libdelaycalctests
 {

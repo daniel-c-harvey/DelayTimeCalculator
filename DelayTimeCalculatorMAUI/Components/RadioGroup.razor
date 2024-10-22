@@ -1,0 +1,25 @@
+﻿@using core;
+
+@typeparam TEnum where TEnum : Enumeration<TEnum>
+
+<div class="form-group">
+    @foreach (TEnum value in Values)
+    {
+        <label><input type="radio" id="@value.Id@value.Name" name="@GroupName" value="@value.Name" @onchange="_ => OnRadioChanged(value)"/>@value.Name</label>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string GroupName { get; set; }
+    [Parameter]
+    public IEnumerable<TEnum> Values { get; set; }
+
+    public TEnum SelectedValue { get; set; }
+
+    protected void OnRadioChanged(TEnum value)
+    {
+        SelectedValue = value;
+    }
+
+}

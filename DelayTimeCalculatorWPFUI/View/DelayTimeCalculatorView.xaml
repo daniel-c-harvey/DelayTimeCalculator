@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:DelayTimeCalculatorWPFUI.View"
         xmlns:viewmodel="clr-namespace:DelayTimeCalculatorWPFUI.ViewModel"
-        xmlns:com="clr-namespace:DelayTimeCalculatorWPFUI.Component"
-        xmlns:enum="clr-namespace:libmusicaltime.Enumerations;assembly=libmusicaltime"
+        xmlns:con="clr-namespace:libwpfguts;assembly=libwpfguts"
         mc:Ignorable="d"
         Title="Echo Space" 
         Height="200" 
         Width="420" 
         ResizeMode="NoResize">
+    
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="Margin" Value="0" />
@@ -39,9 +39,11 @@
             </Setter>
         </Style>
     </Window.Resources>
+    
     <Window.DataContext>
         <viewmodel:DelayTimeCalculatorViewModel x:Name="model"/>
     </Window.DataContext>
+    
     <StackPanel>
         <StackPanel>
             <Grid Margin="8,4,8,4">
@@ -110,7 +112,7 @@
                   Header="Note Subdivision">
             <ComboBox Name="cbo" 
                       IsEditable="False"
-                      ItemsSource="{x:Static enum:NoteRhythmEnumeration.AllItems}"
+                      ItemsSource="{x:Static viewmodel:NoteRhythmEnumeration.AllItems}"
                       SelectedItem="{Binding NoteSubdivision}">
             </ComboBox>
         </GroupBox>
@@ -124,40 +126,24 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <!--<com:RadioGroupBox x:Name="grpModifier" 
-                               Grid.Row="0" 
-                               Grid.Column="0" 
-                               Header="Note Rhythm Modifier" 
-                               Margin="8,4,8,4">
-                --><!--SelectedValue="{Binding NoteModifier}"--><!--
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton Name="radNormal" 
-                                 Content="{x:Static enum:NoteRhythmModifierEnumeration.Normal}" />
-                    <RadioButton Name="radDotted" 
-                                 Content="{x:Static enum:NoteRhythmModifierEnumeration.Dotted}"/>
-                    <RadioButton Name="radTriplet" 
-                                 Content="{x:Static enum:NoteRhythmModifierEnumeration.Triplet}"/>
-                </StackPanel>
-            </com:RadioGroupBox>-->
-
-            <com:RadioGroupBox x:Name="grpModifier" 
+            <con:RadioGroupBox x:Name="grpModifier" 
                                Grid.Row="0" 
                                Grid.Column="0" 
                                Margin="8,4,8,4"
                                Header="Note Rhythm Modifier"
                                Orientation="Horizontal"
                                SelectedValue="{Binding NoteModifier}" 
-                               ItemsSource="{x:Static enum:NoteRhythmModifierEnumeration.AllItems}"/>
+                               ItemsSource="{x:Static viewmodel:NoteRhythmModifierEnumeration.AllItems}"/>
 
 
-            <com:RadioGroupBox x:Name="grpTimeUnit" 
+            <con:RadioGroupBox x:Name="grpTimeUnit" 
                                Grid.Row="0" 
                                Grid.Column="1" 
                                Header="Time Unit" 
                                Margin="8,4,8,4"
                                Orientation="Horizontal"
-                               ItemsSource="{x:Static enum:TimeDivisionEnumeration.AllItems}">
-            </com:RadioGroupBox>
+                               ItemsSource="{x:Static viewmodel:TimeDivisionEnumeration.AllItems}">
+            </con:RadioGroupBox>
         </Grid>
     </StackPanel>
 </Window>

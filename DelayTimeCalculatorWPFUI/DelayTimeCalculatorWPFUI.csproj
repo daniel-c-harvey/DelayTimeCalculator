@@ -9,8 +9,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Component\**" />
+    <EmbeddedResource Remove="Component\**" />
+    <None Remove="Component\**" />
+    <Page Remove="Component\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Themes\Generic.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\core\libframeworkcore\libframeworkcore.csproj" />
     <ProjectReference Include="..\libmusicaltime\libmusicaltime.csproj" />
+    <ProjectReference Include="..\libwpfguts\libwpfguts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Themes\" />
   </ItemGroup>
 
 </Project>

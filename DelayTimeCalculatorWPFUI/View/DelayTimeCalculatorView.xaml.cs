@@ -1,5 +1,4 @@
-﻿using libmusicaltime.Enumerations;
-using libmusicaltime;
+﻿using libmusicaltime;
 
 
 namespace DelayTimeCalculatorWPFUI.View
@@ -18,11 +17,7 @@ namespace DelayTimeCalculatorWPFUI.View
 
         private void InitAssignDefaults()
         {
-            model.TimeSignature = new TimeSignature(4, 4);
-            model.Tempo = new Tempo(120);
-            model.NoteSubdivision = NoteRhythmEnumeration.Quarter;
-            model.NoteModifier = NoteRhythmModifierEnumeration.Normal;
-            model.TimeUnit = TimeDivisionEnumeration.Millisecond;
+            model.Init();
         }
 
         public void AttachHandlers()

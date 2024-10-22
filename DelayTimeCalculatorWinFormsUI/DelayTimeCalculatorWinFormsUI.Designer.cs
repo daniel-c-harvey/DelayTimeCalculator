@@ -1,5 +1,4 @@
 ﻿using CustomControls;
-using libmusicaltime.Enumerations;
 
 namespace DelayTimeCalculatorWinFormsUI
 {
