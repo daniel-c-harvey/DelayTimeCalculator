@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace libwpfguts
+namespace core
 {
     public interface ISelectable
     {
         bool IsSelected { get; set; }
+        object Item { get; set; }
     }
 }

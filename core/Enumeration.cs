@@ -1,5 +1,4 @@
 ﻿// https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/enumeration-classes-over-enum-types
-using libwpfguts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -136,11 +135,11 @@ namespace core
         }
     }
 
-    public abstract class SelectableDisplayEnumerationViewModel<T> : DisplayEnumeration<T>, ISelectable
-    where T : SelectableDisplayEnumerationViewModel<T>
-    {
-        public bool IsSelected { get; set; } = false;
+    //public abstract class SelectableDisplayEnumerationViewModel<T> : DisplayEnumeration<T>, ISelectable
+    //where T : SelectableDisplayEnumerationViewModel<T>
+    //{
+    //    public bool IsSelected { get; set; } = false;
 
-        protected SelectableDisplayEnumerationViewModel(int id, string name, string caption) : base(id, name, caption) { }
-    }
+    //    protected SelectableDisplayEnumerationViewModel(int id, string name, string caption) : base(id, name, caption) { }
+    //}
 }

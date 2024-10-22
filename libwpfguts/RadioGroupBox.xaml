@@ -32,7 +32,7 @@
     <ItemsControl.ItemTemplate>
         <DataTemplate>
             <RadioButton GroupName="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=Header}" 
-                         Content="{Binding Path=Item}" 
+                         Content="{Binding Path=Item}"
                          IsChecked="{Binding Path=IsSelected}">
                 <RadioButton.DataContext>
                     <l:SelectedViewModel/>

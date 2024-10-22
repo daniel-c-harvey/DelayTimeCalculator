@@ -126,7 +126,7 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
         }
     }
 
-    public class NoteRhythmEnumeration : SelectableDisplayEnumerationViewModel<NoteRhythmEnumeration>
+    public class NoteRhythmEnumeration : DisplayEnumeration<NoteRhythmEnumeration>
     {
         public NoteRhythm Rhythm { get; }
 
@@ -146,7 +146,7 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
 
     
 
-    public class NoteRhythmModifierEnumeration : SelectableDisplayEnumerationViewModel<NoteRhythmModifierEnumeration>
+    public class NoteRhythmModifierEnumeration : DisplayEnumeration<NoteRhythmModifierEnumeration>
     {
         public NoteRhythmModifier Modifier { get; }
 
@@ -162,7 +162,7 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
     }
 
 
-    public class TimeDivisionEnumeration : SelectableDisplayEnumerationViewModel<TimeDivisionEnumeration>
+    public class TimeDivisionEnumeration : DisplayEnumeration<TimeDivisionEnumeration>
     {
         public TimeDivision Time { get; }
 

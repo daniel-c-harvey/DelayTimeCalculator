@@ -1,14 +1,7 @@
-using System.Text;
+using core;
 using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -19,6 +12,7 @@ namespace libwpfguts
         static RadioGroupBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(typeof(RadioGroupBox)));
+            ItemsSourceProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(OnItemsSourceChanged, OnCoerceItemsSource));
         }
 
         public RadioGroupBox()
@@ -44,12 +38,11 @@ namespace libwpfguts
 
         private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //var selectedRadio = VisualTreeHelperHelper.GetChildrenRecursive<RadioButton>(d)?.FirstOrDefault(r => r.Content == e.NewValue);
-            //var selectedRadio = ((RadioGroupBox)d).Items.OfType<ISelectable>().FirstOrDefault(s => s.IsSelected);
-            //if (selectedRadio != null)
-            //{
-            //    selectedRadio.IsSelected = true;
-            //}
+            var selectedRadio = ((RadioGroupBox)d).Items.OfType<ISelectable>().FirstOrDefault(s => s.Item == e.NewValue);
+            if (selectedRadio != null)
+            {
+                selectedRadio.IsSelected = true;
+            }
         }
 
         public object SelectedValue
@@ -74,25 +67,29 @@ namespace libwpfguts
             set => SetValue(OrientationProperty, value);
         }
 
-        public new static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource),
-                                        typeof(IEnumerable),
-                                        typeof(RadioGroupBox));
-
-        public new IEnumerable ItemsSource
+        private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            get => base.ItemsSource;
-            set
+            //var control = d as ItemsControl;
+            //if (control != null)
+            //{
+            //    control.ItemsSource = ((IEnumerable)e.NewValue).OfType<object>().Select(o => new SelectedViewModel() { Item = o });
+            //}
+        }
+
+        private static object OnCoerceItemsSource(DependencyObject d, object value)
+        {
+            var itemsSource = value as IEnumerable;
+            if (itemsSource != null)
             {
-                base.ItemsSource = value.OfType<object>().Select(o => new SelectedViewModel(o));
-                
+                return itemsSource.OfType<object>().Select(o => new SelectedViewModel() { Item = o });
             }
+            return value;
         }
 
     }
 
     public class SelectedViewModel
-        : INotifyPropertyChanged
+        : INotifyPropertyChanged, ISelectable
     {
         private bool _isSelected;
         public bool IsSelected
@@ -120,11 +117,6 @@ namespace libwpfguts
                     OnNotifyPropertyChanged();
                 }
             }
-        }
-
-        public SelectedViewModel(object item)
-        {
-            _item = item;
         }
 
         private void OnNotifyPropertyChanged([CallerMemberName] string name = "ERROR")
