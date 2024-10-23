@@ -1,4 +1,5 @@
 ﻿using core;
+using libwpfguts.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,27 +53,36 @@ namespace libwpfguts
         static RadioGroupBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(typeof(RadioGroupBox)));
-            ItemsSourceProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(null, OnCoerceItemsSource));
+            ItemsSourceProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(OnItemsSourceChanged));
         }
 
-        public IEnumerable ItemsSource
+        private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            
+        }
+
+        public RadioGroupBox()
+        {
+            //DataContext = new SelectableItemsViewModel();
+        }
+
+        public IEnumerable<object> ItemsSource
+        {
+            get { return (IEnumerable<object>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(RadioGroupBox));
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable<object>), typeof(RadioGroupBox));
 
-        private static object OnCoerceItemsSource(DependencyObject d, object value)
-        {
-            var itemsSource = value as IEnumerable;
-            if (itemsSource != null)
-            {
-                return new ObservableCollection<object>(itemsSource.OfType<object>().Select(o => new SelectedViewModel() { Item = o }));
-            }
-            return value;
-        }
+        //private static object OnCoerceItemsSource(DependencyObject d, object value)
+        //{
+        //    if (value is IEnumerable<object> itemsSource)
+        //    {
+        //        return new ObservableCollection<object>(itemsSource.OfType<object>().Select(o => new SelectedViewModel() { Item = o }));
+        //    }
+        //    return value;
+        //}
 
         public object SelectedValue
         {
@@ -109,5 +119,14 @@ namespace libwpfguts
 
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.Register(nameof(Orientation), typeof(Orientation), typeof(RadioGroupBox));
+
+        public string DisplayMemberPath
+        {
+            get { return (string)GetValue(DisplayMemberPathProperty); }
+            set { SetValue(DisplayMemberPathProperty, value); }
+        }
+
+        public static readonly DependencyProperty DisplayMemberPathProperty =
+            DependencyProperty.Register("DisplayMemberPath", typeof(string), typeof(RadioGroupBox), new PropertyMetadata(null));
     }
 }

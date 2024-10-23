@@ -1,7 +1,9 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:l="clr-namespace:libwpfguts">
+    xmlns:l="clr-namespace:libwpfguts"
+    xmlns:c="clr-namespace:libwpfguts.Converters"
+    xmlns:vm="clr-namespace:libwpfguts.ViewModels">
 
 
     <Style TargetType="{x:Type l:RadioGroupBox}">
@@ -13,10 +15,11 @@
                             <Style TargetType="{x:Type RadioButton}">
                                 <Setter Property="Margin" Value="4,0,4,0" />
                             </Style>
+                            <c:SelectableViewModelConverter x:Key="ItemsSourceConverter" />
                         </GroupBox.Resources>
 
-                            <ItemsControl x:Name="lstItems"
-                              ItemsSource="{TemplateBinding ItemsSource}">
+                        <ItemsControl x:Name="lstItems"
+                                      ItemsSource="{TemplateBinding ItemsSource, Converter={StaticResource ItemsSourceConverter}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=Orientation}" />
@@ -29,8 +32,13 @@
                                                  Content="{Binding Path=Item}"
                                                  IsChecked="{Binding Path=IsSelected}">
                                         <RadioButton.DataContext>
-                                            <l:SelectedViewModel />
+                                            <vm:SelectableItemViewModel />
                                         </RadioButton.DataContext>
+                                        <RadioButton.ContentTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=DisplayMemberPath}" />
+                                            </DataTemplate>
+                                        </RadioButton.ContentTemplate>
                                     </RadioButton>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -38,6 +46,6 @@
                     </GroupBox>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>
+        </Setter>   
     </Style>
 </ResourceDictionary>

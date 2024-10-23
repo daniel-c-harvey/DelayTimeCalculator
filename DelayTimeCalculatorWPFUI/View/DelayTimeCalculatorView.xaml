@@ -132,8 +132,8 @@
                                Margin="8,4,8,4"
                                Header="Note Rhythm Modifier"
                                Orientation="Horizontal"
-                               SelectedValue="{Binding NoteModifier}" 
-                               ItemsSource="{x:Static viewmodel:NoteRhythmModifierEnumeration.AllItems}"/>
+                               ItemsSource="{x:Static viewmodel:NoteRhythmModifierEnumeration.AllItems}"
+                               SelectedValue="{Binding NoteModifier}" />
 
 
             <con:RadioGroupBox x:Name="grpTimeUnit" 
@@ -142,8 +142,8 @@
                                Header="Time Unit" 
                                Margin="8,4,8,4"
                                Orientation="Horizontal"
-                               SelectedValue="{Binding TimeUnit}"
-                               ItemsSource="{x:Static viewmodel:TimeDivisionEnumeration.AllItems}">
+                               ItemsSource="{x:Static viewmodel:TimeDivisionEnumeration.AllItems}"
+                               SelectedValue="{Binding TimeUnit}">
             </con:RadioGroupBox>
         </Grid>
     </StackPanel>
