@@ -166,15 +166,16 @@ namespace DelayTimeCalculatorWPFUI.ViewModel
     {
         public TimeDivision Time { get; }
 
-        public static TimeDivisionEnumeration Millisecond = new TimeDivisionEnumeration(1, TimeDivision.Millisecond, "ms");
-        public static TimeDivisionEnumeration Second = new TimeDivisionEnumeration(2, TimeDivision.Second, "sec");
-        public static TimeDivisionEnumeration Minute = new TimeDivisionEnumeration(3, TimeDivision.Minute, "min");
+        public static TimeDivisionEnumeration Millisecond = new TimeDivisionEnumeration(1, nameof(Millisecond), TimeDivision.Millisecond, "ms");
+        public static TimeDivisionEnumeration Second = new TimeDivisionEnumeration(2, nameof(Second), TimeDivision.Second, "sec");
+        public static TimeDivisionEnumeration Minute = new TimeDivisionEnumeration(3, nameof(Minute), TimeDivision.Minute, "min");
 
         public TimeDivisionEnumeration(
             int iID,
+            string name,
             TimeDivision time,
             string sCaption)
-            : base(iID, nameof(time), sCaption)
+            : base(iID, name, sCaption)
         {
             Time = time;
         }
