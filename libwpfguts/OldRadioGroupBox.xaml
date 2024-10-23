@@ -1,0 +1,43 @@
+<ItemsControl x:Class="libwpfguts.OldRadioGroupBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l="clr-namespace:libwpfguts"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="100">
+    
+    <ItemsControl.Resources>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Margin" Value="4,0,4,0" />
+            
+        </Style>
+        
+    </ItemsControl.Resources>
+   
+    <ItemsControl.Template>
+        <ControlTemplate>
+            <GroupBox Header="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=Header}">
+                <ItemsPresenter />
+            </GroupBox>
+        </ControlTemplate>
+    </ItemsControl.Template>
+    
+    <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+            <StackPanel Orientation="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=Orientation}" />
+        </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+
+    <ItemsControl.ItemTemplate>
+        <DataTemplate>
+            <RadioButton GroupName="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=Header}" 
+                         Content="{Binding Path=Item}"
+                         IsChecked="{Binding Path=IsSelected}">
+                <RadioButton.DataContext>
+                    <l:SelectedViewModel/>
+                </RadioButton.DataContext>
+            </RadioButton>
+        </DataTemplate>
+    </ItemsControl.ItemTemplate>
+</ItemsControl>
