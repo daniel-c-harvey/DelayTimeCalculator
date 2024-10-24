@@ -143,8 +143,7 @@
                                Margin="8,4,8,4"
                                Orientation="Horizontal"
                                ItemsSource="{x:Static viewmodel:TimeDivisionEnumeration.AllItems}"
-                               SelectedValue="{Binding TimeUnit}">
-            </con:RadioGroupBox>
+                               SelectedValue="{Binding TimeUnit}" />
         </Grid>
     </StackPanel>
 </Window>

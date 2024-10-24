@@ -1,5 +1,4 @@
 ﻿using core;
-using libwpfguts.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,13 +57,15 @@ namespace libwpfguts
 
         private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            
+            ((RadioGroupBox)d).SetItemView((IEnumerable<object>)e.NewValue);
         }
 
-        public RadioGroupBox()
+        private void SetItemView(IEnumerable<object> items)
         {
-            //DataContext = new SelectableItemsViewModel();
+            ItemsView = new ObservableCollection<SelectedViewModel>(items.Select(i => new SelectedViewModel() { Item = i }));
         }
+
+        //private ObservableCollection<SelectedViewModel> itemView;
 
         public IEnumerable<object> ItemsSource
         {
@@ -84,6 +85,15 @@ namespace libwpfguts
         //    return value;
         //}
 
+        public IEnumerable<object> ItemsView
+        {
+            get { return (IEnumerable<object>)GetValue(ItemsViewProperty); }
+            private set { SetValue(ItemsViewProperty, value); }
+        }
+
+        public static readonly DependencyProperty ItemsViewProperty =
+            DependencyProperty.Register(nameof(ItemsView), typeof(IEnumerable<object>), typeof(RadioGroupBox));
+
         public object SelectedValue
         {
             get => GetValue(SelectedValueProperty);
@@ -95,7 +105,7 @@ namespace libwpfguts
 
         private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var selectedRadio = ((RadioGroupBox)d).ItemsSource.OfType<ISelectable>().FirstOrDefault(s => s.Item == e.NewValue);
+            var selectedRadio = ((RadioGroupBox)d).ItemsView.OfType<ISelectable>().FirstOrDefault(s => s.Item == e.NewValue);
             if (selectedRadio != null)
             {
                 selectedRadio.IsSelected = true;
