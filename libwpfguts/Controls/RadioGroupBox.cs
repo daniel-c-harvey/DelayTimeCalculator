@@ -1,22 +1,11 @@
 ﻿using core;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace libwpfguts
+using libwpfguts.Core;
+
+namespace libwpfguts.Controls
 {
     /// <summary>
     /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
@@ -65,8 +54,6 @@ namespace libwpfguts
             ItemsView = new ObservableCollection<SelectedViewModel>(items.Select(i => new SelectedViewModel() { Item = i }));
         }
 
-        //private ObservableCollection<SelectedViewModel> itemView;
-
         public IEnumerable<object> ItemsSource
         {
             get { return (IEnumerable<object>)GetValue(ItemsSourceProperty); }
@@ -75,15 +62,6 @@ namespace libwpfguts
 
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable<object>), typeof(RadioGroupBox));
-
-        //private static object OnCoerceItemsSource(DependencyObject d, object value)
-        //{
-        //    if (value is IEnumerable<object> itemsSource)
-        //    {
-        //        return new ObservableCollection<object>(itemsSource.OfType<object>().Select(o => new SelectedViewModel() { Item = o }));
-        //    }
-        //    return value;
-        //}
 
         public IEnumerable<object> ItemsView
         {
@@ -137,6 +115,25 @@ namespace libwpfguts
         }
 
         public static readonly DependencyProperty DisplayMemberPathProperty =
-            DependencyProperty.Register("DisplayMemberPath", typeof(string), typeof(RadioGroupBox), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(DisplayMemberPath), typeof(string), typeof(RadioGroupBox), new PropertyMetadata(OnDisplayMemberPathChanged));
+
+        private static void OnDisplayMemberPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((RadioGroupBox)d).SetItemTemplateSelector((string)e.NewValue);
+        }
+
+        private void SetItemTemplateSelector(string displayMemberPath)
+        {
+            ItemTemplateSelector = new DisplayMemberPathDataTemplateSelector(displayMemberPath);
+        }
+
+        public DisplayMemberPathDataTemplateSelector ItemTemplateSelector
+        {
+            get => (DisplayMemberPathDataTemplateSelector)GetValue(ItemTemplateSelectorProperty);
+            set => SetValue(ItemTemplateSelectorProperty, value);
+        }
+
+        public static readonly DependencyProperty ItemTemplateSelectorProperty = 
+            DependencyProperty.Register(nameof(ItemTemplateSelector), typeof(DisplayMemberPathDataTemplateSelector), typeof(RadioGroupBox), new PropertyMetadata(null));
     }
 }

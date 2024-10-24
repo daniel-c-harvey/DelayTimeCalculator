@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:DelayTimeCalculatorWPFUI.View"
         xmlns:viewmodel="clr-namespace:DelayTimeCalculatorWPFUI.ViewModel"
-        xmlns:con="clr-namespace:libwpfguts;assembly=libwpfguts"
+        xmlns:con="clr-namespace:libwpfguts.Controls;assembly=libwpfguts"
         mc:Ignorable="d"
         Title="Echo Space" 
         Height="200" 
@@ -133,7 +133,8 @@
                                Header="Note Rhythm Modifier"
                                Orientation="Horizontal"
                                ItemsSource="{x:Static viewmodel:NoteRhythmModifierEnumeration.AllItems}"
-                               SelectedValue="{Binding NoteModifier}" />
+                               SelectedValue="{Binding NoteModifier}"
+                               DisplayMemberPath="Caption" />
 
 
             <con:RadioGroupBox x:Name="grpTimeUnit" 
@@ -143,7 +144,8 @@
                                Margin="8,4,8,4"
                                Orientation="Horizontal"
                                ItemsSource="{x:Static viewmodel:TimeDivisionEnumeration.AllItems}"
-                               SelectedValue="{Binding TimeUnit}" />
+                               SelectedValue="{Binding TimeUnit}" 
+                               DisplayMemberPath="Caption" />
         </Grid>
     </StackPanel>
 </Window>
