@@ -6,37 +6,24 @@
         xmlns:view="clr-namespace:DelayTimeCalculatorWPFUI.View"
         xmlns:viewmodel="clr-namespace:DelayTimeCalculatorWPFUI.ViewModel"
         xmlns:con="clr-namespace:libwpfguts.Controls;assembly=libwpfguts"
+        xmlns:cv="clr-namespace:libwpfguts.Converters;assembly=libwpfguts"
         mc:Ignorable="d"
         Title="Echo Space" 
         Height="200" 
         Width="420" 
         ResizeMode="NoResize">
-    
+
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="Margin" Value="0" />
         </Style>
         <Style TargetType="TextBox">
-            <!--<Setter Property="Width" Value="20"/>-->
             <Setter Property="Margin" Value="3" />
-        </Style>
-        <Style TargetType="RadioButton">
-            <Setter Property="ContentTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=Caption}" />
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="ItemTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=Caption}" />
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Background" Value="LightGray" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     
@@ -46,14 +33,14 @@
     
     <StackPanel>
         <StackPanel>
-            <Grid Margin="8,4,8,4">
+            <Grid Margin="4,4,4,4">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Row="0" 
@@ -85,7 +72,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Name="txtTempo"
                                  MinWidth="60"                                   
-                                 Text="{Binding Tempo.BeatsPerMinute}"/>
+                                 Text="{Binding Tempo.BeatsPerMinute}" />
                         <Label Padding="2,5,5,5"
                                Content="BPM"/>
                     </StackPanel>
@@ -97,6 +84,7 @@
                     </Label>
                     <StackPanel Orientation="Horizontal">
                         <TextBox Name="txtTime"
+                                 IsReadOnly="True"
                                  MinWidth="60"
                                  Text="{Binding TimeOutput}"/>
                         <Label Padding="2,5,5,5" 
@@ -113,7 +101,8 @@
             <ComboBox Name="cbo" 
                       IsEditable="False"
                       ItemsSource="{x:Static viewmodel:NoteRhythmEnumeration.AllItems}"
-                      SelectedItem="{Binding NoteSubdivision}">
+                      SelectedItem="{Binding NoteSubdivision}"
+                      DisplayMemberPath="Caption">
             </ComboBox>
         </GroupBox>
         

@@ -13,6 +13,7 @@ namespace DelayTimeCalculatorWPFUI.View
             InitializeComponent();
 
             InitAssignDefaults();
+            AttachHandlers();
         }
 
         private void InitAssignDefaults()
@@ -27,8 +28,8 @@ namespace DelayTimeCalculatorWPFUI.View
             txtTempo.TextChanged += Recalculate;
 
             cbo.SelectionChanged += Recalculate;
-            //grpModifier.CheckedChanged += Recalculate;
-            //grpTimeUnit.CheckedChanged += Recalculate;
+            grpModifier.SelectedItemChanged += Recalculate;
+            grpTimeUnit.SelectedItemChanged += Recalculate;
         }
 
         public void Recalculate(Object sender, EventArgs e)
