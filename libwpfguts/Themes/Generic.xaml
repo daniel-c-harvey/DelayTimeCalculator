@@ -6,6 +6,7 @@
     xmlns:c="clr-namespace:libwpfguts.Converters">
 
 
+
     <Style TargetType="{x:Type l:RadioGroupBox}">
         <Setter Property="Template">
             <Setter.Value>
@@ -15,8 +16,6 @@
                             <Style TargetType="{x:Type RadioButton}">
                                 <Setter Property="Margin" Value="4,0,4,0" />
                             </Style>
-                            <!--<c:SelectableViewModelConverter x:Key="ItemsSourceConverter" />-->
-                            <c:TestConverter x:Key="TestConverter" />
                         </GroupBox.Resources>
 
                         <ItemsControl x:Name="lstItems"
@@ -29,9 +28,11 @@
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <RadioButton GroupName="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=Header}" 
-                                                 Content="{Binding Path=Item}"
-                                                 IsChecked="{Binding Path=IsSelected}">
+                                    <RadioButton Content="{Binding Path=Item}"
+                                                 GroupName="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=Header}" 
+                                                 IsChecked="{Binding Path=IsSelected}"
+                                                 Command="{x:Static l:RadioGroupBox.SelectedValueChangedCommand}"
+                                                 CommandParameter="{Binding Path=Item}">
                                         <RadioButton.ContentTemplate>
                                             <DataTemplate>
                                                 <ContentPresenter ContentTemplateSelector="{Binding RelativeSource={RelativeSource AncestorType=l:RadioGroupBox}, Path=ItemTemplateSelector}"/>
@@ -44,6 +45,6 @@
                     </GroupBox>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>   
+        </Setter>
     </Style>
 </ResourceDictionary>

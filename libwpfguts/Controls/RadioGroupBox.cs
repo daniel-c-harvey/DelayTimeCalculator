@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 using libwpfguts.Core;
+using System.Windows.Input;
 
 namespace libwpfguts.Controls
 {
@@ -38,10 +39,17 @@ namespace libwpfguts.Controls
     /// </summary>
     public class RadioGroupBox : Control
     {
+        public static RoutedCommand SelectedValueChangedCommand = new RoutedCommand();
+
         static RadioGroupBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(typeof(RadioGroupBox)));
             ItemsSourceProperty.OverrideMetadata(typeof(RadioGroupBox), new FrameworkPropertyMetadata(OnItemsSourceChanged));
+        }
+
+        public RadioGroupBox()
+        {
+            CommandBindings.Add(new CommandBinding(SelectedValueChangedCommand, CheckedItemChanged));
         }
 
         private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -79,16 +87,24 @@ namespace libwpfguts.Controls
         }
 
         public static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(RadioGroupBox), new PropertyMetadata(OnSelectedValueChanged));
+            DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(RadioGroupBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
 
         private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var selectedRadio = ((RadioGroupBox)d).ItemsView.OfType<ISelectable>().FirstOrDefault(s => s.Item == e.NewValue);
+            var rgb = d as RadioGroupBox;
+            var selectedRadio = rgb?.ItemsView.OfType<ISelectable>().FirstOrDefault(s => s.Item == e.NewValue);
             if (selectedRadio != null)
             {
-                selectedRadio.IsSelected = true;
+                if (!selectedRadio.IsSelected)
+                {
+                   selectedRadio.IsSelected = true;
+                }
+                rgb?.SelectedItemChanged?.Invoke(rgb, new SelectedItemChangedEventArgs(e.NewValue, e.OldValue));
             }
         }
+
+        public delegate void SelectedItemChangedEventHandler(object sender, SelectedItemChangedEventArgs args);
+        public event SelectedItemChangedEventHandler SelectedItemChanged;
 
         public string Header
         {
@@ -135,5 +151,10 @@ namespace libwpfguts.Controls
 
         public static readonly DependencyProperty ItemTemplateSelectorProperty = 
             DependencyProperty.Register(nameof(ItemTemplateSelector), typeof(DisplayMemberPathDataTemplateSelector), typeof(RadioGroupBox), new PropertyMetadata(null));
+
+        private void CheckedItemChanged(object sender, ExecutedRoutedEventArgs e)
+        {
+            SelectedValue = e.Parameter;
+        }
     }
 }
