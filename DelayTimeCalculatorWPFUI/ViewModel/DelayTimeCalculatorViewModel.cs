@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using libmusicaltime;
+using libmusicaltime.Enumerations;
 
 namespace DelayTimeCalculatorWPFUI.ViewModel
 {

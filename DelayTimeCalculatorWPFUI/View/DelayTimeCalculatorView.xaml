@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:view="clr-namespace:DelayTimeCalculatorWPFUI.View"
-        xmlns:viewmodel="clr-namespace:DelayTimeCalculatorWPFUI.ViewModel"
+        xmlns:vm="clr-namespace:DelayTimeCalculatorWPFUI.ViewModel"
         xmlns:con="clr-namespace:libwpfguts.Controls;assembly=libwpfguts"
         xmlns:cv="clr-namespace:libwpfguts.Converters;assembly=libwpfguts"
+        xmlns:mte="clr-namespace:libmusicaltime.Enumerations;assembly=libmusicaltime"
         mc:Ignorable="d"
         Title="Echo Space" 
         Height="200" 
@@ -28,7 +28,7 @@
     </Window.Resources>
     
     <Window.DataContext>
-        <viewmodel:DelayTimeCalculatorViewModel x:Name="model"/>
+        <vm:DelayTimeCalculatorViewModel x:Name="model"/>
     </Window.DataContext>
     
     <StackPanel>
@@ -101,7 +101,7 @@
                   Header="Note Subdivision">
             <ComboBox Name="cbo" 
                       IsEditable="False"
-                      ItemsSource="{x:Static viewmodel:NoteRhythmEnumeration.AllItems}"
+                      ItemsSource="{x:Static mte:NoteRhythmEnumeration.AllItems}"
                       SelectedItem="{Binding NoteSubdivision}"
                       DisplayMemberPath="Caption">
             </ComboBox>
@@ -122,7 +122,7 @@
                                Margin="8,4,8,4"
                                Header="Note Rhythm Modifier"
                                Orientation="Horizontal"
-                               ItemsSource="{x:Static viewmodel:NoteRhythmModifierEnumeration.AllItems}"
+                               ItemsSource="{x:Static mte:NoteRhythmModifierEnumeration.AllItems}"
                                SelectedValue="{Binding NoteModifier}"
                                DisplayMemberPath="Caption" />
 
@@ -133,7 +133,7 @@
                                Header="Time Unit" 
                                Margin="8,4,8,4"
                                Orientation="Horizontal"
-                               ItemsSource="{x:Static viewmodel:TimeDivisionEnumeration.AllItems}"
+                               ItemsSource="{x:Static mte:TimeDivisionEnumeration.AllItems}"
                                SelectedValue="{Binding TimeUnit}" 
                                DisplayMemberPath="Caption" />
         </Grid>
