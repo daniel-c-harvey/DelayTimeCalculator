@@ -100,8 +100,8 @@ namespace DelayTimeCalculatorWinFormsUI
             lblTimeUnits.DataBindings.AddBi(
                 new Binding(
                     nameof(lblTimeUnits.Text),
-                    model.TimeUnit,
-                    nameof(model.TimeUnit.Name)));
+                    model,
+                    nameof(model.TimeUnit)));
         }
         private void InitAssignDefaults()
         {
