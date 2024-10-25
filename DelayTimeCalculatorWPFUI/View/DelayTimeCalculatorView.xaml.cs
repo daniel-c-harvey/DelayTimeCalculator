@@ -14,6 +14,9 @@ namespace DelayTimeCalculatorWPFUI.View
 
             InitAssignDefaults();
             AttachHandlers();
+            
+            // Trigger the first calculation here since the user hasn't changed anything yet
+            model.Recalculate();
         }
 
         private void InitAssignDefaults()
@@ -35,6 +38,11 @@ namespace DelayTimeCalculatorWPFUI.View
         public void Recalculate(Object sender, EventArgs e)
         {
             model.Recalculate();
+        }
+
+        private void txtTempo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
         }
     }
 }

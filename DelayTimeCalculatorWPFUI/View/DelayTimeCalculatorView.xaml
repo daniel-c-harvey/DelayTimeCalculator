@@ -72,7 +72,9 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Name="txtTempo"
                                  MinWidth="60"                                   
-                                 Text="{Binding Tempo.BeatsPerMinute}" />
+                                 Text="{Binding Tempo.BeatsPerMinute, Mode=TwoWay}" 
+                                 TextChanged="txtTempo_TextChanged"/>
+                        
                         <Label Padding="2,5,5,5"
                                Content="BPM"/>
                     </StackPanel>
