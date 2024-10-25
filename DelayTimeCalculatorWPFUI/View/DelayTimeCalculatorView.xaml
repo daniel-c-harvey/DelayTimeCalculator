@@ -58,10 +58,10 @@
                     <StackPanel>
                         <TextBox Name="txtTimeSigBeats"
                                  Width="20"  
-                                 Text="{Binding TimeSignature.Beats}"/>
+                                 Text="{Binding TimeSignature.Beats, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBox Name="txtTimeSigPulse"
                                  Width="20" 
-                                 Text="{Binding TimeSignature.Pulse.Subdivision}"/>
+                                 Text="{Binding TimeSignature.Pulse.Subdivision, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -72,8 +72,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Name="txtTempo"
                                  MinWidth="60"                                   
-                                 Text="{Binding Tempo.BeatsPerMinute, Mode=TwoWay}" 
-                                 TextChanged="txtTempo_TextChanged"/>
+                                 Text="{Binding Path=Tempo.BeatsPerMinute, UpdateSourceTrigger=PropertyChanged}"/>
                         
                         <Label Padding="2,5,5,5"
                                Content="BPM"/>

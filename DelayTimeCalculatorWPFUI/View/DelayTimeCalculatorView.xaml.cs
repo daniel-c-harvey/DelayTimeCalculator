@@ -39,10 +39,5 @@ namespace DelayTimeCalculatorWPFUI.View
         {
             model.Recalculate();
         }
-
-        private void txtTempo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
-        }
     }
 }
