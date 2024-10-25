@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DelayTimeCalculator.cs" />
+    <Compile Include="Enumerations\NoteRhythmEnumeration.cs" />
+    <Compile Include="Enumerations\NoteRhythmModifierEnumeration.cs" />
+    <Compile Include="Enumerations\TimeDivisionEnumeration.cs" />
     <Compile Include="NoteRhythm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tempo.cs" />

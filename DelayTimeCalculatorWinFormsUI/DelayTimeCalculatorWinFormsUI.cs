@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 using core.DataBinding;
 using libmusicaltime;
+using libmusicaltime.Enumerations;
 
 namespace DelayTimeCalculatorWinFormsUI
 {
